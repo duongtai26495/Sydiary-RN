@@ -7,4 +7,5 @@ export default {
     USERNAME:    require('../assets/icons/username.png'),
     FULLNAME:    require('../assets/icons/fullname.png'),
     PASSWORD:    require('../assets/icons/password.png'),
+    ARROW:    require('../assets/icons/right-arrow.png'),
 }

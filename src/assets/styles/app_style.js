@@ -5,16 +5,15 @@ const HEIGHT = Dimensions.get('window').height;
 const app_style = StyleSheet.create({
     container: {
         width:WIDTH,
-        height:HEIGHT,
+        height:'100%',
         justifyContent:'center',
         alignItems:'center'
     },
     list_container:{
         width:WIDTH,
-        height:HEIGHT,
+        height:'100%',
         paddingHorizontal:10,
         marginTop:10,
-        marginBottom:80
     },
     logo: {
         width: 100,
@@ -78,17 +77,29 @@ const app_style = StyleSheet.create({
         alignItems:'center'
     },
     diary_row:{
-        padding:5,
-        backgroundColor:Colors.PRIMARY,
-        marginBottom:5,
-        borderRadius:5
+        padding:15,
+        marginBottom:10,
+        borderRadius:5,
+        flexDirection:'row',
+        alignItems:'center'
     },
     diary_title:{
         fontSize:15,
         color:Colors.BLACK,
         fontWeight:'bold'
+    },
+    diary_time:{
+        fontSize:10,
+        textAlign:'right',
+        flex:1,
+        alignSelf:'center',
+    },
+    icon_arrow:{
+        width:20,
+        height:20,
+        marginHorizontal:10,
+        opacity:0.1
     }
-    
 })
 
 export default app_style

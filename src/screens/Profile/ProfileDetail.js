@@ -48,7 +48,6 @@ const ProfileDetail = ({ navigation, route }) => {
               style={[style.auth_btn, { backgroundColor: Colors.PRIMARY }]}>
               <Text style={[style.labelBtn]} >{String_constants.SIGNOUT}</Text>
             </TouchableOpacity>
-
           </View>
         </ScrollView>
       </View>

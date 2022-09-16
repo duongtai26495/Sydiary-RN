@@ -6,6 +6,7 @@ import NavigationPath from '../constants/NavigationPath'
 import Icon_path from '../constants/Icon_path'
 import Colors from '../assets/color/Colors'
 import { Home, ProfileDetail } from '../screens'
+import HomeNavigation from './HomeNavigation'
 const Tab = createMaterialBottomTabNavigator()
 const iconSize = 20
 const MainTab = () => {
@@ -15,17 +16,13 @@ const MainTab = () => {
             shifting={true}
             activeColor={Colors.PRIMARY}
             inactiveColor={Colors.LIGHT}
-            barStyle={{ backgroundColor: Colors.WHITE, borderTopColor: Colors.PRIMARY, borderTopWidth: 0.5, }}
-            options={{
-                headerShown: false,
-                presentation: true,
-            }}>
+            barStyle={{ backgroundColor: Colors.WHITE, borderTopColor: Colors.PRIMARY, borderTopWidth: 0.5 }}
+            >
             <Tab.Screen
                 name={NavigationPath.HOME}
-                component={Home}
+                component={HomeNavigation}
                 options={{
                     headerShown: false,
-                    animation: true,
                     tabBarIcon: ({ focused }) => (
                         <View>
                             <Image

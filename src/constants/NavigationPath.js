@@ -12,4 +12,5 @@ HOMEPAGE:'HomePage',
 AUTHENPAGE:'AuthenPage',
 PROFILEPAGE:'ProfilePage',
 PROFILEDETAIL:'ProfileDetail',
+DIARYDETAIL:'DiaryDetail'
 }

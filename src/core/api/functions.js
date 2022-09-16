@@ -5,7 +5,6 @@ const url_login = Api_constants.BASE_URL + "auth/login"; //access_token
 const url_register = Api_constants.BASE_URL + "user/register";
 const url_getUserData = Api_constants.BASE_URL + "user/profile/"; //data user
 const url_getDiaryData = Api_constants.BASE_URL + "diary/"
-
 export async function LoginWithUsernamePassword(User) {
     try {
         let data = new FormData();
@@ -108,7 +107,8 @@ const GetUserData = async (username, data) => {
     } catch (error) { console.log(error) };
 }
 
-export async function LoadDiaryData(){
+export async function LoadDiaryData(id){
+
     let token = await AsyncStorage.getItem(Storage_constants.ACCESS_TOKEN);
     let option = {
         method: 'GET',
@@ -116,9 +116,8 @@ export async function LoadDiaryData(){
             'Authorization': 'Bearer ' + token
         }
     }
-
-    return await fetch(url_getDiaryData, option)
+    let url = id == null ? url_getDiaryData : url_getDiaryData + id
+    return await fetch(url, option)
         .then(response => response.json())
         .catch(err => console.log(err))
 }
-
