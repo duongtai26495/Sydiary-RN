@@ -5,5 +5,4 @@ export default {
     BLACK:'rgba(0,0,0,1)',
     SMOKE:'rgba(200,200,200,1)',
     DARK:'rgba(20,20,25,1)'
-
 }
