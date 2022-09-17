@@ -40,7 +40,7 @@ const SignIn = ({ navigation }) => {
         backgroundColor={Colors.PRIMARY}
         barStyle='dark-content' />
       <ScrollView style={[{ flex: 1 }]}>
-        <View style={[style.container]}>
+        <View style={[style.container,{marginTop:'10%'}]}>
           <FallingLogo />
           <View style={[style.form_container]}>
             <Text style={[style.auth_heading]}>{String_constants.WLCBACK.toUpperCase()}</Text>

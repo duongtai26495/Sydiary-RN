@@ -7,4 +7,6 @@ export default {
     SIGNIN_YOUR_ACCOUNT :   'Sign in to your account',
     WLCBACK:    'Welcome back!',
     SIGNOUT:'Sign out',
+    NODIARY :'No diary to show',
+    
 }

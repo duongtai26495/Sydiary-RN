@@ -14,7 +14,8 @@ const DiaryDetail = ({ navigation, route }) => {
 
 
   const getData = async () => {
-    if (await CheckTokenIsExist("Diary Detail")) {
+    if (await CheckTokenIsExist("Diary Detail") && id != null) {
+      console.log("ID: "+id)
       await LoadDiaryData(id)
         .then((result) => {
           setDiary(result.data);

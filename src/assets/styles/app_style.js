@@ -6,13 +6,13 @@ const app_style = StyleSheet.create({
     container: {
         width:WIDTH,
         height:'100%',
+        alignItems:'center',
         justifyContent:'center',
-        alignItems:'center'
     },
     list_container:{
         width:WIDTH,
         height:'100%',
-        paddingHorizontal:10,
+        paddingHorizontal:20,
         marginTop:10,
     },
     logo: {
@@ -77,19 +77,19 @@ const app_style = StyleSheet.create({
         alignItems:'center'
     },
     diary_row:{
-        padding:15,
         marginBottom:10,
         borderRadius:5,
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+        paddingVertical:15
     },
     diary_title:{
         fontSize:15,
         color:Colors.BLACK,
-        fontWeight:'bold'
+        fontWeight:'bold',
     },
     diary_time:{
-        fontSize:10,
+        fontSize:8,
         textAlign:'right',
         flex:1,
         alignSelf:'center',
@@ -99,6 +99,12 @@ const app_style = StyleSheet.create({
         height:20,
         marginHorizontal:10,
         opacity:0.1
+    },
+    diary_color:{
+        width:20,
+        height:20,
+        marginRight:5,
+        borderRadius:10,
     }
 })
 

@@ -1,6 +1,5 @@
 import { View, Text, SafeAreaView, StatusBar, ScrollView, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Storage_constants from '../../constants/Storage_constants';
 import { CheckTokenIsExist, LoadDiaryData } from '../../core/api/functions'
@@ -9,6 +8,8 @@ import NavigationPath from '../../constants/NavigationPath'
 import Colors from '../../assets/color/Colors';
 import style from '../../assets/styles/app_style';
 import Icon_path from '../../constants/Icon_path';
+import String_constants from '../../constants/String_constants';
+import DiaryColors from '../../assets/color/DiaryColors';
 const Home = ({ navigation, route }) => {
 
   useEffect(() => {
@@ -26,6 +27,24 @@ const Home = ({ navigation, route }) => {
     }
   }
 
+  const emptyData = () => {
+    return(
+      <View>
+        <Text style={[{padding:5,width:'100%',textAlign:'center'}]}>{String_constants.NODIARY.toUpperCase()}</Text>
+      </View>
+    )
+  }
+
+  const topFunctions = () => {
+    return(
+      <View style={[{width:'100%',height:70,flexDirection:'row'}]}>
+          <View style={[{flex:1,height:'100%',flexDirection:'column',justifyContent:'center'}]}>
+            <Text style={[{fontSize:25,fontWeight:'bold'}]}>Diary</Text>
+            <Text style={[{opacity:0.5}]}>Total {data.length} diaries</Text>
+          </View>
+      </View>
+    )
+  }
   const getData = async () => {
     setFetching(true);
     setData([]);
@@ -34,24 +53,27 @@ const Home = ({ navigation, route }) => {
         setData(result.data)
         setFetching(false);
       })
-
   }
 
   const openDiaryDetail = (id) => {
     navigation.navigate(NavigationPath.DIARYDETAIL, {id})
   }
 
-
+  
   const ItemRow = (item) => {
-   
     if (item.active) {
       const content = item.content.length > 40 ? item.content.slice(0,40) + "..." : item.content;
-      const title = item.title.length > 20 ? item.title.slice(0, 20) + "..." : item.title;
+      const title = item.title.length > 30 ? item.title.slice(0, 30) + "..." : item.title;
+      const diary_color = item.color.toUpperCase();
+
       return (
+
         <TouchableOpacity onPress={()=>openDiaryDetail(item.id)} style={[style.diary_row]} key={item.id} >
-          <View style={[{ flex: 4, flexDirection: 'column' }]}>
-            <Text style={[style.diary_title]}>{title}</Text>
-            <Text style={[style.diary_desc]}>{content}</Text>
+          <View style={[style.diary_color,{backgroundColor:Colors.PRIMARY}]}>
+          </View>
+          <View style={[{ flex: 4, flexDirection: 'column',marginLeft:5 }]}>
+            <Text numberOfLines={1} style={[style.diary_title]}>{title}</Text>
+            <Text numberOfLines={1} style={[style.diary_desc]}>{content}</Text>
           </View>
           <View style={[{ flex: 1, borderLeftWidth:1,flexDirection:'row', borderColor:Colors.SMOKE,paddingLeft:5}]}>
             <Text style={[style.diary_time]}>{item.last_edited}</Text>
@@ -69,11 +91,7 @@ const Home = ({ navigation, route }) => {
       <StatusBar
         backgroundColor={Colors.PRIMARY}
         barStyle='dark-content' />
-        {isFetching ? (
-        <ActivityIndicator
-          color={Colors.PRIMARY} />
-      ) :
-        (
+      
           <FlatList
             style={[{ flex: 1 }, style.list_container]}
             data={data}
@@ -83,9 +101,13 @@ const Home = ({ navigation, route }) => {
             renderItem={({ item }) => (
               ItemRow(item)
             )}
-
+            ListEmptyComponent={
+              emptyData()
+            }
+            ListHeaderComponent={
+              topFunctions()
+            }
           />
-        )}
     </SafeAreaView>
   )
 }
