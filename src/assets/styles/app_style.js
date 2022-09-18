@@ -12,8 +12,11 @@ const app_style = StyleSheet.create({
     list_container:{
         width:WIDTH,
         height:'100%',
-        paddingHorizontal:20,
-        marginTop:10,
+        paddingHorizontal:10,
+    },
+    top_component_container:{
+        width:WIDTH,
+        paddingHorizontal:10,
     },
     logo: {
         width: 100,

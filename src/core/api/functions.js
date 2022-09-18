@@ -5,6 +5,7 @@ const url_login = Api_constants.BASE_URL + "auth/login"; //access_token
 const url_register = Api_constants.BASE_URL + "user/register";
 const url_getUserData = Api_constants.BASE_URL + "user/profile/"; //data user
 const url_getDiaryData = Api_constants.BASE_URL + "diary/"
+const url_CreateDiary = Api_constants.BASE_URL + "diary/create"
 export async function LoginWithUsernamePassword(User) {
     try {
         let data = new FormData();
@@ -120,4 +121,26 @@ export async function LoadDiaryData(id){
     return await fetch(url, option)
         .then(response => response.json())
         .catch(err => console.log(err))
+}
+
+export async function CreateNewDiary(Diary){
+    try {
+        let token = await AsyncStorage.getItem(Storage_constants.ACCESS_TOKEN);
+        let data  = JSON.stringify({
+            "title":Diary.title,
+            "content":Diary.content
+        })
+        let diary_header = new Headers();
+        diary_header.append("Authorization", "Bearer " + token)
+        diary_header.append("Content-Type", "application/json")
+        let option = {
+            method: 'POST',
+            headers: diary_header,
+            body: data
+        }
+
+       return await fetch(url_CreateDiary, option)
+            .then(response => response.json());
+    }
+    catch (error) { console.log(error) };
 }

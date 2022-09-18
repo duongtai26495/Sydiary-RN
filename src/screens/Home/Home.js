@@ -11,11 +11,11 @@ import Icon_path from '../../constants/Icon_path';
 import String_constants from '../../constants/String_constants';
 import DiaryColors from '../../assets/color/DiaryColors';
 const Home = ({ navigation, route }) => {
-
+  const {refresh} =route.params;
 
   useEffect(() => {
     checkUserLogin();
-  }, [])
+  }, [refresh])
 
   const [data, setData] = useState([]);
   const [isFetching, setFetching] = useState(false);
@@ -26,6 +26,10 @@ const Home = ({ navigation, route }) => {
     } else {
       await getData()
     }
+  }
+  
+  const OpenNewDiary = () =>{
+    navigation.navigate(NavigationPath.DIARYNAVIGATION, {screen:NavigationPath.NEWDIARY})
   }
 
   const emptyData = () => {
@@ -38,10 +42,16 @@ const Home = ({ navigation, route }) => {
 
   const topFunctions = () => {
     return(
-      <View style={[{width:'100%',height:70,flexDirection:'row'}]}>
+      <View style={[{width:'100%',height:70,flexDirection:'row',justifyContent:'space-between'}]}>
           <View style={[{flex:1,height:'100%',flexDirection:'column',justifyContent:'center'}]}>
             <Text style={[{fontSize:25,fontWeight:'bold'}]}>Diary</Text>
             <Text style={[{opacity:0.5}]}>{data == null ? "No diary to show" : "Total " + data.length +" diaries"} </Text>
+          </View>
+          <View style={[{height:'100%',flex:1}]}>
+          <TouchableOpacity onPressOut={()=>OpenNewDiary()} style={[{alignSelf:'flex-end'}]}>
+          <Text style={[{fontSize:50}]}>{"+"}</Text>
+          </TouchableOpacity>
+            
           </View>
       </View>
     )
@@ -52,7 +62,7 @@ const Home = ({ navigation, route }) => {
     await LoadDiaryData()
       .then((result) => {
         setData(result.data)
-        setFetching(false);
+        setFetching(false)
       })
   }
 
@@ -91,7 +101,10 @@ const Home = ({ navigation, route }) => {
       <StatusBar
         backgroundColor={Colors.PRIMARY}
         barStyle='dark-content' />
-      
+        <View style={[style.top_component_container]}>
+        {topFunctions()}
+        </View>
+        
           <FlatList
             style={[{ flex: 1 }, style.list_container]}
             data={data}
@@ -103,9 +116,6 @@ const Home = ({ navigation, route }) => {
             )}
             ListEmptyComponent={
               emptyData()
-            }
-            ListHeaderComponent={
-              topFunctions()
             }
           />
     </SafeAreaView>
