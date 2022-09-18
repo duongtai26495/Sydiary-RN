@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, StatusBar, ScrollView, TextInput, TouchableOp
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Storage_constants from '../../constants/Storage_constants';
-import { CheckTokenIsExist, LoadDiaryData } from '../../core/api/functions'
+import { CheckTokenIsExist, LoadDiaryData, SignOut } from '../../core/api/functions'
 import { StackActions } from '@react-navigation/native';
 import NavigationPath from '../../constants/NavigationPath'
 import Colors from '../../assets/color/Colors';
@@ -12,8 +12,9 @@ import String_constants from '../../constants/String_constants';
 import DiaryColors from '../../assets/color/DiaryColors';
 const Home = ({ navigation, route }) => {
 
+
   useEffect(() => {
-    checkUserLogin()
+    checkUserLogin();
   }, [])
 
   const [data, setData] = useState([]);
@@ -40,7 +41,7 @@ const Home = ({ navigation, route }) => {
       <View style={[{width:'100%',height:70,flexDirection:'row'}]}>
           <View style={[{flex:1,height:'100%',flexDirection:'column',justifyContent:'center'}]}>
             <Text style={[{fontSize:25,fontWeight:'bold'}]}>Diary</Text>
-            <Text style={[{opacity:0.5}]}>Total {data.length} diaries</Text>
+            <Text style={[{opacity:0.5}]}>{data == null ? "No diary to show" : "Total " + data.length +" diaries"} </Text>
           </View>
       </View>
     )
@@ -56,7 +57,7 @@ const Home = ({ navigation, route }) => {
   }
 
   const openDiaryDetail = (id) => {
-    navigation.navigate(NavigationPath.DIARYDETAIL, {id})
+    navigation.navigate(NavigationPath.DIARYNAVIGATION,{ screen: NavigationPath.DIARYDETAIL, params: {id}})
   }
 
   
@@ -64,7 +65,6 @@ const Home = ({ navigation, route }) => {
     if (item.active) {
       const content = item.content.length > 40 ? item.content.slice(0,40) + "..." : item.content;
       const title = item.title.length > 30 ? item.title.slice(0, 30) + "..." : item.title;
-      const diary_color = item.color.toUpperCase();
 
       return (
 

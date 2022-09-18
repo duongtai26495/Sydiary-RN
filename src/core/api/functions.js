@@ -116,7 +116,7 @@ export async function LoadDiaryData(id){
             'Authorization': 'Bearer ' + token
         }
     }
-    let url = id == null ? url_getDiaryData : url_getDiaryData + id
+    let url = id == null ? url_getDiaryData+"all" : url_getDiaryData + id
     return await fetch(url, option)
         .then(response => response.json())
         .catch(err => console.log(err))

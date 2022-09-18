@@ -1,12 +1,11 @@
 
 import React from 'react'
-import { View, TouchableOpacity, Image } from 'react-native'
+import { View, Image } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import NavigationPath from '../constants/NavigationPath'
 import Icon_path from '../constants/Icon_path'
 import Colors from '../assets/color/Colors'
-import { Home, ProfileDetail } from '../screens'
-import HomeNavigation from './HomeNavigation'
+import {Home, ProfileDetail} from '../screens'
 const Tab = createMaterialBottomTabNavigator()
 const iconSize = 20
 const MainTab = () => {
@@ -20,7 +19,7 @@ const MainTab = () => {
             >
             <Tab.Screen
                 name={NavigationPath.HOME}
-                component={HomeNavigation}
+                component={Home}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
